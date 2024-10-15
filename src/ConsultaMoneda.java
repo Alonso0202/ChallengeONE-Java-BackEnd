@@ -6,10 +6,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class ConsultaMoneda {
-    private static final String API_URL = "https://v6.exchangerate-api.com/v6/45b28f44a06b2d2e88df38bf/pair/USD/ARS"; // Cambia a la moneda que desees
 
-    public ApiResponse obtenerTasas() throws IOException {
-        URL url = new URL(API_URL);
+    private static final String API_URL_BASE = "https://v6.exchangerate-api.com/v6/45b28f44a06b2d2e88df38bf/pair/";
+
+    // Modificar el método para recibir monedas de origen y destino
+    public ApiResponse obtenerTasas(String monedaOrigen, String monedaDestino) throws IOException {
+        // Crear la URL dinámica con las monedas seleccionadas
+        String apiUrl = API_URL_BASE + monedaOrigen + "/" + monedaDestino;
+        URL url = new URL(apiUrl);
+
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
 
